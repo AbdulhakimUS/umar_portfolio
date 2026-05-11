@@ -1,0 +1,12 @@
+import { Router } from 'express';
+import { getSkills, createHard, updateHard, deleteHard, createSoft, updateSoft, deleteSoft } from '../controllers/skillsController';
+import { authenticateToken } from '../middleware/authenticateToken';
+const router = Router();
+router.get('/', getSkills);
+router.post('/hard', authenticateToken, createHard);
+router.put('/hard/:id', authenticateToken, updateHard);
+router.delete('/hard/:id', authenticateToken, deleteHard);
+router.post('/soft', authenticateToken, createSoft);
+router.put('/soft/:id', authenticateToken, updateSoft);
+router.delete('/soft/:id', authenticateToken, deleteSoft);
+export default router;

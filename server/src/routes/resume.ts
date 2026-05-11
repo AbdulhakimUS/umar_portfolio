@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import { getResume, uploadResume, deleteResume } from '../controllers/resumeController';
+import { authenticateToken } from '../middleware/authenticateToken';
+import multer from 'multer';
+const upload = multer({ dest: 'uploads/' });
+const router = Router();
+router.get('/', getResume);
+router.post('/', authenticateToken, upload.single('resume'), uploadResume);
+router.delete('/', authenticateToken, deleteResume);
+export default router;

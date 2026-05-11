@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import { getProfile, updateProfile, uploadPhoto } from '../controllers/profileController';
+import { authenticateToken } from '../middleware/authenticateToken';
+import multer from 'multer';
+const upload = multer({ dest: 'uploads/' });
+const router = Router();
+router.get('/', getProfile);
+router.put('/', authenticateToken, updateProfile);
+router.post('/photo', authenticateToken, upload.single('photo'), uploadPhoto);
+export default router;

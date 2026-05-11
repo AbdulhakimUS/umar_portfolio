@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import { getActivities, createActivity, updateActivity, deleteActivity, reorderActivities } from '../controllers/activitiesController';
+import { authenticateToken } from '../middleware/authenticateToken';
+const router = Router();
+router.get('/', getActivities);
+router.post('/', authenticateToken, createActivity);
+router.put('/:id', authenticateToken, updateActivity);
+router.delete('/:id', authenticateToken, deleteActivity);
+router.patch('/reorder', authenticateToken, reorderActivities);
+export default router;

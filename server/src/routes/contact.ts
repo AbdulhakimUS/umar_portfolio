@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import { getContact, createContact, updateContact, deleteContact, reorderContact } from '../controllers/contactController';
+import { authenticateToken } from '../middleware/authenticateToken';
+const router = Router();
+router.get('/', getContact);
+router.post('/', authenticateToken, createContact);
+router.put('/:id', authenticateToken, updateContact);
+router.delete('/:id', authenticateToken, deleteContact);
+router.patch('/reorder', authenticateToken, reorderContact);
+export default router;

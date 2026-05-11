@@ -1,0 +1,13 @@
+import { Router } from 'express';
+import { getQualifications, updateSchool, createExam, updateExam, deleteExam, createCertification, updateCertification, deleteCertification } from '../controllers/qualificationsController';
+import { authenticateToken } from '../middleware/authenticateToken';
+const router = Router();
+router.get('/', getQualifications);
+router.put('/school', authenticateToken, updateSchool);
+router.post('/exams', authenticateToken, createExam);
+router.put('/exams/:id', authenticateToken, updateExam);
+router.delete('/exams/:id', authenticateToken, deleteExam);
+router.post('/certifications', authenticateToken, createCertification);
+router.put('/certifications/:id', authenticateToken, updateCertification);
+router.delete('/certifications/:id', authenticateToken, deleteCertification);
+export default router;

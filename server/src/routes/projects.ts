@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import { getProjects, createProject, updateProject, deleteProject, reorderProjects } from '../controllers/projectsController';
+import { authenticateToken } from '../middleware/authenticateToken';
+const router = Router();
+router.get('/', getProjects);
+router.post('/', authenticateToken, createProject);
+router.put('/:id', authenticateToken, updateProject);
+router.delete('/:id', authenticateToken, deleteProject);
+router.patch('/reorder', authenticateToken, reorderProjects);
+export default router;

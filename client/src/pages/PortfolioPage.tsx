@@ -12,22 +12,32 @@ import { useProfile, useActivities, useQualifications, useProjects, useSkills, u
 
 export default function PortfolioPage() {
   const { data: profile } = useProfile();
-  const { data: activities } = useActivities();
+  const { data: activitiesRaw } = useActivities();
   const { data: quals } = useQualifications();
-  const { data: projects } = useProjects();
-  const { data: skills } = useSkills();
+  const { data: projectsRaw } = useProjects();
+  const { data: skillsRaw } = useSkills();
   const { data: vision } = useVision();
   const { data: resume } = useResume();
-  const { data: contacts } = useContact();
+  const { data: contactsRaw } = useContact();
+
+  const activities = Array.isArray(activitiesRaw) ? activitiesRaw : [];
+  const projects = Array.isArray(projectsRaw) ? projectsRaw : [];
+  const contacts = Array.isArray(contactsRaw) ? contactsRaw : [];
+  const hardSkills = Array.isArray(skillsRaw?.hard) ? skillsRaw.hard : [];
+  const softSkills = Array.isArray(skillsRaw?.soft) ? skillsRaw.soft : [];
 
   return (
     <Layout>
       <HeroSection profile={profile} />
       <AboutSection profile={profile} />
       <ECSection activities={activities} />
-      <QualificationsSection school={quals?.school} exams={quals?.exams} certifications={quals?.certifications} />
+      <QualificationsSection
+        school={quals?.school}
+        exams={Array.isArray(quals?.exams) ? quals.exams : []}
+        certifications={Array.isArray(quals?.certifications) ? quals.certifications : []}
+      />
       <ProjectsSection projects={projects} />
-      <SkillsSection hard={skills?.hard} soft={skills?.soft} />
+      <SkillsSection hard={hardSkills} soft={softSkills} />
       <VisionSection vision={vision} />
       <ResumeSection resumeUrl={resume?.resumeUrl} />
       <ContactSection contacts={contacts} />

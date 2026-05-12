@@ -3,13 +3,13 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const [cursor, setCursor] = useState({ x: 0, y: 0, hovered: false });
+  const [cursor, setCursor] = useState({ x: -100, y: -100, hovered: false });
 
   useEffect(() => {
     const move = (e: MouseEvent) => setCursor(c => ({ ...c, x: e.clientX, y: e.clientY }));
     const over = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
-      setCursor(c => ({ ...c, hovered: !!(t.closest('a,button,[role=button],.card') ) }));
+      setCursor(c => ({ ...c, hovered: !!(t.closest('a,button,[role=button]')) }));
     };
     window.addEventListener('mousemove', move);
     window.addEventListener('mouseover', over);
@@ -19,7 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-navy font-inter">
       <div
-        className="fixed pointer-events-none z-[9999] rounded-full bg-gold transition-transform duration-100"
+        className="fixed pointer-events-none z-[9999] rounded-full bg-gold transition-all duration-100"
         style={{
           left: cursor.x - (cursor.hovered ? 12 : 6),
           top: cursor.y - (cursor.hovered ? 12 : 6),

@@ -6,7 +6,8 @@ const CATEGORIES = ['All', 'Leadership', 'Academic', 'Community', 'Arts', 'Athle
 
 export default function ECSection({ activities }: { activities?: ECActivity[] }) {
   const [cat, setCat] = useState('All');
-  const filtered = activities?.filter(a => cat === 'All' || a.category === cat) || [];
+  const list = Array.isArray(activities) ? activities : [];
+  const filtered = list.filter(a => cat === 'All' || a.category === cat);
 
   return (
     <section id="experience" className="py-24 px-6 max-w-6xl mx-auto">
@@ -25,7 +26,7 @@ export default function ECSection({ activities }: { activities?: ECActivity[] })
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filtered.map((a, i) => (
           <ScrollReveal key={a.id} delay={i * 0.1}>
-            <div className="bg-navy-light rounded-xl border border-white/5 p-6 hover:border-gold/40 hover:-translate-y-1 transition-all duration-300 group">
+            <div className="bg-navy-light rounded-xl border border-white/5 p-6 hover:border-gold/40 hover:-translate-y-1 transition-all duration-300">
               <span className="px-2 py-1 rounded text-xs bg-gold/20 text-gold border border-gold/20">{a.category}</span>
               <h3 className="font-playfair text-xl font-bold text-white mt-3 mb-1">{a.title}</h3>
               <p className="text-gold text-sm mb-1">{a.role}</p>

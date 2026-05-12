@@ -20,13 +20,15 @@ export default function Navbar() {
     setOpen(false);
   };
 
+  const initials = profile?.name
+    ? profile.name.split(' ').filter(Boolean).map((n: string) => n[0]).join('')
+    : 'UP';
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'backdrop-blur-md bg-navy/80 border-b border-gold/10' : ''}`}>
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <div className="w-10 h-10 rounded-full bg-gold flex items-center justify-center">
-          <span className="text-navy font-playfair font-bold text-sm">
-            {(profile?.name || '').split(' ').map((n: string) => n[0]).join('') || 'UP'}
-          </span>
+          <span className="text-navy font-playfair font-bold text-sm">{initials}</span>
         </div>
         <div className="hidden md:flex items-center gap-8">
           {links.map(l => (

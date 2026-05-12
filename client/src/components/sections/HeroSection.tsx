@@ -7,9 +7,11 @@ import { useState, useEffect } from 'react';
 export default function HeroSection({ profile }: { profile?: Profile }) {
   const parallax = useMouseParallax();
   const [typed, setTyped] = useState('');
-  const tagline = profile?.tagline || 'Aspiring Commercial Lawyer | Nature Advocate';
+  const tagline = profile?.tagline || '';
+  const name = profile?.name || 'Portfolio';
 
   useEffect(() => {
+    if (!tagline) return;
     let i = 0;
     setTyped('');
     const timer = setInterval(() => {
@@ -22,8 +24,8 @@ export default function HeroSection({ profile }: { profile?: Profile }) {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden" id="hero">
-      <div className="absolute inset-0 pointer-events-none" style={{ transform: `translate(${parallax.x * 0.5}px, ${parallax.y * 0.5}px)` }}>
-        <svg className="w-full h-full opacity-10" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+      <div className="absolute inset-0 pointer-events-none opacity-10" style={{ transform: `translate(${parallax.x * 0.5}px, ${parallax.y * 0.5}px)` }}>
+        <svg className="w-full h-full" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
           <g stroke="#C9A94B" strokeWidth="1" fill="none">
             <line x1="400" y1="700" x2="400" y2="400"/>
             <line x1="400" y1="400" x2="250" y2="250"/><line x1="400" y1="400" x2="550" y2="250"/>
@@ -36,7 +38,7 @@ export default function HeroSection({ profile }: { profile?: Profile }) {
       </div>
       <div className="relative z-10 text-center px-6 max-w-4xl">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
-          {profile?.name?.split(' ').map((word, i) => (
+          {name.split(' ').map((word, i) => (
             <motion.span key={i} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.15, duration: 0.6 }}
               className="inline-block font-playfair text-5xl md:text-7xl font-bold text-white mr-4">

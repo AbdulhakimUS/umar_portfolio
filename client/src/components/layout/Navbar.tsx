@@ -25,7 +25,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <div className="w-10 h-10 rounded-full bg-gold flex items-center justify-center">
           <span className="text-navy font-playfair font-bold text-sm">
-            {profile?.name?.split(' ').map(n => n[0]).join('') || 'UP'}
+            {(profile?.name || '').split(' ').map((n: string) => n[0]).join('') || 'UP'}
           </span>
         </div>
         <div className="hidden md:flex items-center gap-8">

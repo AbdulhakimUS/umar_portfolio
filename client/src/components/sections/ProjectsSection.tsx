@@ -22,7 +22,7 @@ export default function ProjectsSection({ projects }: { projects?: Project[] }) 
                 <p className="text-gray-400 mb-4">{p.description}</p>
                 {p.impact && <p className="text-gold text-sm mb-4 font-medium">📊 {p.impact}</p>}
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {p.tags.map(t => <span key={t} className="px-3 py-1 bg-gold/10 text-gold text-xs rounded-full border border-gold/20">{t}</span>)}
+                  {Array.isArray(p.tags) ? p.tags.map : [].map(t => <span key={t} className="px-3 py-1 bg-gold/10 text-gold text-xs rounded-full border border-gold/20">{t}</span>)}
                 </div>
                 <div className="flex gap-4">
                   {p.githubUrl && <a href={p.githubUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"><Github size={18}/>GitHub</a>}
